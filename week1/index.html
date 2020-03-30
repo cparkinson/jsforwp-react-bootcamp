@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Week 1 assignment</title>
+  <script src="react.js"></script>
+  <script src="react-dom.js"></script>
+  <script src="babel.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    // Build a simple one page website with a static header, footer and main content area.
+
+    const H1title = ( <h1>Clare's JSX page</h1> ); 
+
+    const H2header = ( <h2>Simple JSX elements in a page</h2> ); 
+
+    const Quote = ( <blockquote>Hello babies. Welcome to Earth. It's hot in the summer and cold in the winter. It's round and wet and crowded. On the outside, babies, you've got a hundred years here. There's only one rule that I know of, babies - "God damn it, you've got to be kind."</blockquote>);
+
+    const Citation = ( <cite>Kurt Vonnegut</cite> ); 
+
+    const FooterText = ( <p>Clare Parkinson, March 2020</p> );
+
+    function Header() {
+      return (
+        <header id="main"> {H1title}  </header>
+      )
+    }   
+
+    function Main() {
+      return (
+        <main> {H2header} {Quote} {Citation} </main>
+      )
+    }
+      
+    function Footer() {
+      return (
+        <footer> <hr /> {FooterText} </footer>
+      )
+    }
+
+      function App() {
+        return (
+          <React.Fragment>
+          <Header />
+          <Main />
+          <Footer />
+          </React.Fragment>
+        )
+      }
+      
+
+    ReactDOM.render(
+     <App />,
+      document.getElementById('root')
+    );
+
+  </script>
+</body>
+
+</html>
