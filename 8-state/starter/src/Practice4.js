@@ -42,6 +42,8 @@ class Practice4 extends React.Component {
   };
 
   //this doesn't work: decrement(e) { why not?
+  //because we're in a class, so it has to be a property, really
+  //classes don't have functions
   decrement = (e) => {
     e.preventDefault();
     this.setState({ count: this.state.count - 1 });

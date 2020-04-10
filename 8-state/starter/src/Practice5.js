@@ -33,7 +33,9 @@ class Practice5 extends React.Component {
       <>
         {/*
           5. Call <SimpleStorage parent={this} />
+          //see storage in console at Components > SimpleStorage > props > parent
         */}
+
         <SimpleStorage parent={this} />
         <Header text={this.state.count} />
         <Button onClick={this.decrement} text="-" />
