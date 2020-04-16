@@ -3,7 +3,7 @@ import React from "react";
 class Practice4 extends React.Component {
   state = {
     goal: 20,
-    points: 0
+    points: 0,
   };
 
   /* 
@@ -14,6 +14,20 @@ class Practice4 extends React.Component {
        prevState.points !== this.state.points
     5. If that passes, then log out "State Changed!"
   */
+
+  componentDidUpdate(prevProps, prevState) {
+    console.group("<Practice4 />");
+    console.log(`prev state of points: ${prevState.points}`);
+    console.log(`new state: ${this.state.points}`);
+
+    // console.log(`prevProps object ${prevProps.points}`);
+    // props are undefined here - is that right?
+
+    if (prevState.points !== this.state.points) {
+      console.log("State change!");
+    }
+    console.groupEnd();
+  }
 
   addPoint = () => {
     this.setState({ points: this.state.points + 1 });
@@ -56,12 +70,23 @@ class BarChart extends React.Component {
     10. If that passes, then log out "Props Changed!"
   */
 
+  componentDidUpdate(prevProps, prevState) {
+    console.group("<BarChart />");
+    console.log(`prevProps points: ${prevProps.points}`);
+    console.log(`current points: ${this.props.points}`);
+    console.groupEnd();
+
+    if (prevProps.points !== this.props.points) {
+      console.log(`Props changed!`);
+    }
+  }
+
   render() {
     const barStyles = {
       height: "200px",
       width: "50px",
       border: "1px #ccc solid",
-      position: "relative"
+      position: "relative",
     };
     const fillStyles = {
       height: `${this.props.points}0px`,
@@ -69,7 +94,7 @@ class BarChart extends React.Component {
       backgroundColor: "green",
       position: "absolute",
       bottom: "0",
-      transition: "height .4s"
+      transition: "height .4s",
     };
     return (
       <div className="bar" style={barStyles}>
@@ -79,7 +104,7 @@ class BarChart extends React.Component {
   }
 }
 
-const Controls = props => {
+const Controls = (props) => {
   if (props.points < props.goal) {
     return <button onClick={props.addPoint}>+1 Point</button>;
   } else {

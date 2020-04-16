@@ -3,7 +3,7 @@ import React from "react";
 class Practice3 extends React.Component {
   state = {
     goal: 20,
-    points: 0
+    points: 0,
   };
   addPoint = () => {
     this.setState({ points: this.state.points + 1 });
@@ -36,12 +36,20 @@ class BarChart extends React.Component {
     4. If points has no remainder the return true
   */
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.points % 5) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   render() {
     const barStyles = {
       height: "200px",
       width: "50px",
       border: "1px #ccc solid",
-      position: "relative"
+      position: "relative",
     };
     const fillStyles = {
       height: `${this.props.points}0px`,
@@ -49,7 +57,7 @@ class BarChart extends React.Component {
       backgroundColor: "green",
       position: "absolute",
       bottom: "0",
-      transition: "height .4s"
+      transition: "height .4s",
     };
     return (
       <div className="bar" style={barStyles}>
@@ -59,7 +67,7 @@ class BarChart extends React.Component {
   }
 }
 
-const Controls = props => {
+const Controls = (props) => {
   if (props.points < props.goal) {
     return <button onClick={props.addPoint}>+1 Point</button>;
   } else {
