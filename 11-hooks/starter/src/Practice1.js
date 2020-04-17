@@ -8,6 +8,8 @@ const Practice1 = () => {
    * 4. Add a button to increase the count
    */
 
+  //clare says: I did this exercise in 8-state/counter-1 app
+
   return (
     <>
       <h1>Counter</h1>

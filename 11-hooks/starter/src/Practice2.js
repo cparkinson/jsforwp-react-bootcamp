@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Practice2 = () => {
   /*
@@ -6,7 +6,17 @@ const Practice2 = () => {
    * 2. Display the points for the home and away teams
    * 3. Add a button for each team to add one point
    * 4. Add an onClick event to the Reset button that sets both points to zero
+   
+  // this causes infinite loop 
+  <button onclick={setHomePoints(homePoints + 1)}>Home scores!</button> }
+  //this is correct
+  <button onclick={() => setHomePoints(homePoints + 1)}>Home scores!</button> }
+
+   
    */
+
+  const [homePoints, setHomePoints] = useState(0);
+  const [awayPoints, setAwayPoints] = useState(0);
 
   return (
     <>
@@ -18,11 +28,26 @@ const Practice2 = () => {
           justifyContent: `space-between`,
         }}
       >
-        <h2>Home: POINTS</h2>
-        <h2>Away: POINTS</h2>
+        <h2>Home: {homePoints}</h2>
+        <h2>Away: {awayPoints}</h2>
       </div>
       <p>
-        <button>Reset Points</button>
+        <button onClick={() => setHomePoints(homePoints + 1)}>
+          Home scores!
+        </button>
+        <button onClick={() => setAwayPoints(awayPoints + 1)}>
+          Away scores :(
+        </button>
+      </p>
+      <p>
+        <button
+          onClick={() => {
+            setHomePoints(0);
+            setAwayPoints(0);
+          }}
+        >
+          Reset Points
+        </button>
       </p>
     </>
   );

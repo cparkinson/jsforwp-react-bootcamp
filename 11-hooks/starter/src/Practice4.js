@@ -10,12 +10,44 @@ const Practice4 = () => {
 
   const [catImg, setCatImg] = useState(``);
 
+  /*
+  passing an empty array as the second parameter
+  This approach effectively makes the effect only run once on first render. 
+  This happens since the empty array will not change, 
+  therefor there is nothing to trigger the effect to run again 
+  as there is in the previous example.
+  */
+
   useEffect(() => {
-    fetch(`https://aws.random.cat/meow`)
-      .then(response => response.json())
-      .then(data => setCatImg(data.file))
-      .catch(error => console.error(error));
+    fetchCat();
   }, []);
+
+  const fetchCat = () => {
+    fetch(`https://aws.random.cat/meow`)
+      .then((response) => response.json())
+      .then((data) => setCatImg(data.file))
+      .catch((error) => console.error(error));
+  };
+
+  //loop, breaks npm. runs continuously. also fetchPosts not a thin
+  /*
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log(`5 Second Refresh!`);
+      fetchPosts();
+    }, 5000);
+  });
+  */
+
+  //this one runs continuously, makes a timer, when it reaches 5 seconds it
+  // fetches cat , restarts timer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log(`5 second refresh`);
+      fetchCat();
+    }, 5000);
+    return () => clearTimeout(timer);
+  });
 
   return (
     <>
